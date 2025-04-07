@@ -10,7 +10,7 @@ namespace APBD_06_TUT.controller
     [ApiController]
     public class AnimalsController : ControllerBase
     {
-        private AnimalsService animalsService = new AnimalsService();
+        private AnimalsService _animalsService = new AnimalsService();
         
         
         [HttpGet("{id:int}")]
@@ -19,9 +19,18 @@ namespace APBD_06_TUT.controller
             return Ok(id);
         }
 
+        [HttpGet]
         public IActionResult GetAnimals()
         {
-            return Ok();
+            List<Animal> animals = _animalsService.GetAllAnimals();
+            return Ok(animals);
+        }
+
+        [HttpPost]
+        public IActionResult AddAnimal(Animal animal)
+        {
+            _animalsService.AddAnimal(animal);
+            return Created(animal.Id.ToString(), animal);
         }
     }
 }

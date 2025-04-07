@@ -28,9 +28,9 @@ public class AnimalsService
         Database.Animals.Remove(result);
     }
 
-    public void UpdateAnimal(Animal animal)
+    public void UpdateAnimal(Animal animal, int id)
     {
-        var result = Database.Animals.Find(x => x.Id == animal.Id);
+        var result = Database.Animals.Find(x => x.Id == id);
         result = result ?? throw new KeyNotFoundException("Animal not found");
         
         result.Name = animal.Name;
